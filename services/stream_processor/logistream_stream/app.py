@@ -14,19 +14,19 @@ from .config import (
 
 logger = logging.getLogger(__name__)
 
-# 1️⃣ Faust app definition (must come BEFORE app.topic/app.Table)
+# Faust app definition (must come BEFORE app.topic/app.Table)
 app = faust.App(
     APP_ID,
     broker=f"kafka://{KAFKA_BOOTSTRAP_SERVERS}",
-    value_serializer="raw",  # keep raw bytes; we'll decode Avro manually
-    topic_partitions=3,      # 🚨 important: default topics use 3 partitions
+    value_serializer="raw",  # decoded Avro manually
+    topic_partitions=3,      # important: default topics use 3 partitions
 )
 
-# 2️⃣ Ingest topics (raw bytes for now)
+# Ingest topics (raw bytes for now)
 shipment_events_topic = app.topic(TOPIC_SHIPMENT_EVENTS, value_type=bytes)
 gps_points_topic = app.topic(TOPIC_GPS_POINTS, value_type=bytes)
 
-# 3️⃣ Output topics
+# Output topics
 shipment_features_topic = app.topic(TOPIC_SHIPMENT_FEATURES, value_type=bytes)
 
 # JSON fan-out topic for Prometheus / DB / etc.
@@ -37,11 +37,11 @@ shipment_features_json_topic = app.topic(
 
 alerts_topic = app.topic(TOPIC_ALERTS, value_type=bytes)
 
-# 4️⃣ 5.3: Simple per-route/hub delay stats table (v0)
+# Simple per-route/hub delay stats table (v0)
 route_hub_delay_stats = app.Table(
     "route_hub_delay_stats",
     default=lambda: {"total": 0, "delayed": 0},
-    partitions=3, # 🚨 match ingest.shipment_events.v1
+    partitions=3, # match ingest.shipment_events.v1
 )
 
 

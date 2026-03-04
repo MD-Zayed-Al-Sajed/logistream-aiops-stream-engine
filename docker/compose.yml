@@ -1,5 +1,7 @@
+name: logistream
+
 services:
-  # Zookeeper for Kafka
+
   zookeeper:
     image: confluentinc/cp-zookeeper:7.3.2
     container_name: zookeeper
@@ -8,15 +10,15 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "2181:2181"
-    networks:
-      - logistream
+    networks: [logistream]
+    restart: unless-stopped
 
-  # Kafka broker (internal + host listeners)
   kafka:
     image: confluentinc/cp-kafka:7.3.2
     container_name: kafka
     depends_on:
-      - zookeeper
+      zookeeper:
+        condition: service_started
     ports:
       - "9092:9092"
       - "29092:29092"
@@ -30,25 +32,34 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-    networks:
-      - logistream
+    networks: [logistream]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-topics --bootstrap-server localhost:9092 --list >/dev/null 2>&1 || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 40
 
-  # Schema Registry
   schemareg:
     image: confluentinc/cp-schema-registry:7.3.2
     container_name: schemareg
     depends_on:
-      - kafka
+      kafka:
+        condition: service_healthy
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schemareg
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9092
     ports:
       - "8081:8081"
-    networks:
-      - logistream
+    networks: [logistream]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8081/subjects >/dev/null || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 60
 
-  # Postgres (TimescaleDB)
   postgres:
     image: timescale/timescaledb:latest-pg16
     container_name: postgres
@@ -58,48 +69,159 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
-    networks:
-      - logistream
+    networks: [logistream]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB} -h localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 40
 
-  # Redis
   redis:
     image: redis:7-alpine
     container_name: redis
     ports:
       - "6379:6379"
-    networks:
-      - logistream
+    networks: [logistream]
+    restart: unless-stopped
 
-  # Prometheus
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: prometheus
-    volumes:
-      - ../infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-    ports:
-      - "9090:9090"
-    networks:
-      - logistream
-
-  # Grafana
-  grafana:
-    image: grafana/grafana-oss:latest
-    container_name: grafana
-    depends_on:
-      - prometheus
-    ports:
-      - "${GRAFANA_PORT}:3000"
-    networks:
-      - logistream
-
-  # Jaeger
   jaeger:
     image: jaegertracing/all-in-one:1.60
     container_name: jaeger
     ports:
-      - "${JAEGER_PORT}:16686"
-    networks:
-      - logistream
+      - "${JAEGER_PORT:-16686}:16686"
+      - "14268:14268"
+    networks: [logistream]
+    restart: unless-stopped
+
+  kafka-exporter:
+    image: danielqsj/kafka-exporter:latest
+    container_name: kafka-exporter
+    command:
+      - "--kafka.server=kafka:9092"
+    ports:
+      - "9308:9308"
+    depends_on:
+      kafka:
+        condition: service_healthy
+    networks: [logistream]
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    depends_on:
+      kafka-exporter:
+        condition: service_started
+    networks: [logistream]
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    depends_on:
+      prometheus:
+        condition: service_started
+    ports:
+      - "${GRAFANA_PORT:-3000}:3000"
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/provisioning/dashboards:/var/lib/grafana/dashboards:ro
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_DEFAULT_THEME: dark
+    networks: [logistream]
+    restart: unless-stopped
+
+  # -----------------------------
+  # App Services (PROFILE: app)
+  # -----------------------------
+  producers:
+    build:
+      context: ..
+      dockerfile: docker/services/producers/Dockerfile
+    container_name: logistream-producers
+    profiles: ["app"]
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SCHEMA_REGISTRY_URL: http://schemareg:8081
+    depends_on:
+      kafka:
+        condition: service_healthy
+      schemareg:
+        condition: service_healthy
+    networks: [logistream]
+    restart: unless-stopped
+
+  stream-processor:
+    build:
+      context: ..
+      dockerfile: docker/services/stream_processor/Dockerfile
+    container_name: logistream-stream-processor
+    profiles: ["app"]
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SCHEMA_REGISTRY_URL: http://schemareg:8081
+      LOGISTREAM_CONSUMER_GROUP: ${LOGISTREAM_CONSUMER_GROUP}
+      REDIS_URL: ${REDIS_URL}
+      JAEGER_ENDPOINT: ${JAEGER_ENDPOINT}
+    depends_on:
+      kafka:
+        condition: service_healthy
+      schemareg:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      jaeger:
+        condition: service_started
+    networks: [logistream]
+    restart: unless-stopped
+
+  sink:
+    build:
+      context: ..
+      dockerfile: docker/services/sink/Dockerfile
+    container_name: logistream-sink
+    profiles: ["app"]
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    depends_on:
+      kafka:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    networks: [logistream]
+    restart: unless-stopped
+
+  metrics:
+    build:
+      context: ..
+      dockerfile: docker/services/metrics/Dockerfile
+    container_name: logistream-metrics
+    profiles: ["app"]
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "9105:9105"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [logistream]
+    restart: unless-stopped
 
 networks:
   logistream:

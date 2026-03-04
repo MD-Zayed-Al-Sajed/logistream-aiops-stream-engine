@@ -10,7 +10,7 @@ if env_path.exists():
     load_dotenv(env_path)
 
 # Kafka broker URL (host accessible)
-KAFKA_BOOTSTRAP_SERVERS = os.getenv("KAFKA_BROKER", "localhost:29092")
+KAFKA_BOOTSTRAP_SERVERS = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "kafka:9092")
 
 # Application ID / consumer group for Faust
 APP_ID = os.getenv("LOGISTREAM_APP_ID", "logistream-stream-processor")
