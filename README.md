@@ -25,7 +25,7 @@ Developed Live Decision Dashboards: Created responsive React-based dashboards th
 
 Containerized Cloud-Native Deployment: Managed the full SDLC of a fully containerized environment, ensuring the platform is scalable, observable, and capable of handling heterogeneous data sources with sub-second latency.
 
-## For Reliability
+## For observability 
 <img width="1557" height="668" alt="image" src="https://github.com/user-attachments/assets/673ccb55-1f7d-45e2-ab02-aebddf1a8085" />
 <img width="1529" height="266" alt="image" src="https://github.com/user-attachments/assets/1d2b5ef9-4052-43d5-bf6c-c158e1f5288f" />
 
