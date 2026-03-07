@@ -1,7 +1,7 @@
-Domain-agnostic AIOps platform designed to ingest and analyze continuous, high-volume data streams from heterogeneous sources (Applications, Microservices, IoT, Incidents, and Logistics & Supply Chain). The system replaces traditional batch reporting with real-time, predictive intelligence.
+Domain-agnostic AIOps platform designed to ingest and analyze continuous, high-volume data streams from heterogeneous sources (Applications, Microservices, IoT, Incidents, and Logistics & Supply Chain). The system replaces batch reporting with real-time, predictive intelligence.
 
 # LogiStream AIOps Platform
-AI-driven logistics event streaming and operations platform.
+AIOps - High Concurrency Data Flow Management System & ML Operation.
 
 Monorepo layout aligned with:
 - Kafka-based event bus
@@ -25,15 +25,15 @@ Developed Live Decision Dashboards: Created responsive React-based dashboards th
 
 Containerized Cloud-Native Deployment: Managed the full SDLC of a fully containerized environment, ensuring the platform is scalable, observable, and capable of handling heterogeneous data sources with sub-second latency.
 
+**Future extend possibilities**
+— Classical-Quantum Hybrid Computing Bridge
+
 ## For observability 
 <img width="1557" height="668" alt="image" src="https://github.com/user-attachments/assets/673ccb55-1f7d-45e2-ab02-aebddf1a8085" />
 <img width="1529" height="266" alt="image" src="https://github.com/user-attachments/assets/1d2b5ef9-4052-43d5-bf6c-c158e1f5288f" />
 
 
-
-
 ##Responsible Use Disclaimer  
-
 **It is NOT intended for safety-critical or regulated environments**, including but not limited to:
 
 Medical systems  
