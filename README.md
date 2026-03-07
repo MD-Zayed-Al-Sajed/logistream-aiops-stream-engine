@@ -25,9 +25,6 @@ Developed Live Decision Dashboards: Created responsive React-based dashboards th
 
 Containerized Cloud-Native Deployment: Managed the full SDLC of a fully containerized environment, ensuring the platform is scalable, observable, and capable of handling heterogeneous data sources with sub-second latency.
 
-**Future extend possibilities**
-— Classical-Quantum Hybrid Computing Bridge, (compute orchestration / routing layer.)
-
 ## For observability 
 <img width="1557" height="668" alt="image" src="https://github.com/user-attachments/assets/673ccb55-1f7d-45e2-ab02-aebddf1a8085" />
 <img width="1529" height="266" alt="image" src="https://github.com/user-attachments/assets/1d2b5ef9-4052-43d5-bf6c-c158e1f5288f" />
@@ -64,21 +61,14 @@ All anomaly detections surface through observable dashboards requiring human con
 
 ## 📄 License
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Attribution Required](https://img.shields.io/badge/Attribution-Required-blue.svg)](NOTICE)
 
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License**
 
-### 🏷 Attribution Requirement (Important)
-This project includes original work authored by:
+Copyright (c) 2025 Md Zayed Al Sajed
+Permission is hereby granted...
 
-**© 2025 Md Zayed Al Sajed**
-Any reuse, redistribution, or derivative work **MUST** include clear attribution:
-> “Original author: Md Zayed Al Sajed — LogiStream AIOps Platform”
+**Future extend possibilities**
+— Classical-Quantum Hybrid Computing Bridge, (compute orchestration / routing layer.)
+https://github.com/MD-Zayed-Al-Sajed/QuantumBridge-SimRuntime
 
-Attribution must appear in:
-- Documentation  
-- About screen / UI (if applicable)  
-- README of derivative repos  
-- Any public deployment or SaaS offering  
 
-Failure to provide attribution **violates the NOTICE requirements**.
