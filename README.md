@@ -26,7 +26,7 @@ Developed Live Decision Dashboards: Created responsive React-based dashboards th
 Containerized Cloud-Native Deployment: Managed the full SDLC of a fully containerized environment, ensuring the platform is scalable, observable, and capable of handling heterogeneous data sources with sub-second latency.
 
 **Future extend possibilities**
-— Classical-Quantum Hybrid Computing Bridge
+— Classical-Quantum Hybrid Computing Bridge, (compute orchestration / routing layer.)
 
 ## For observability 
 <img width="1557" height="668" alt="image" src="https://github.com/user-attachments/assets/673ccb55-1f7d-45e2-ab02-aebddf1a8085" />
