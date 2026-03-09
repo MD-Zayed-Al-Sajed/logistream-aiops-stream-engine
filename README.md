@@ -67,8 +67,4 @@ This project is licensed under the **MIT License**
 Copyright (c) 2025 Md Zayed Al Sajed
 Permission is hereby granted...
 
-**Future extend possibilities**
-— Classical-Quantum Hybrid Computing Bridge, (compute orchestration / routing layer.)
-https://github.com/MD-Zayed-Al-Sajed/QuantumBridge-SimRuntime
-
 
