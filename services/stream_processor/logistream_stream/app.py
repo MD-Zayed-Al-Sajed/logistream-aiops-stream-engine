@@ -19,7 +19,7 @@ app = faust.App(
     APP_ID,
     broker=f"kafka://{KAFKA_BOOTSTRAP_SERVERS}",
     value_serializer="raw",  # decoded Avro manually
-    topic_partitions=3,      # important: default topics use 3 partitions
+    topic_partitions=3,      # important: default topics use 1 partitions
 )
 
 # Ingest topics (raw bytes for now)

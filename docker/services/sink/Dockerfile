@@ -7,4 +7,5 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 COPY . /app
 ENV PYTHONPATH=/app
 
-CMD ["python","-m","services.sinks.pg_timeseries_sink"]
+# cleaner logs
+CMD ["python", "-u", "-m", "services.sinks.pg_timeseries_sink"]

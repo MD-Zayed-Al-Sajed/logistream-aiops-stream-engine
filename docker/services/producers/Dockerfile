@@ -7,5 +7,5 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 COPY . /app
 ENV PYTHONPATH=/app
 
-# run both modes by default (you can change later)
-CMD ["python","-m","services.producers.main","--mode","both","--eps-shipments","2","--eps-gps","2"]
+# For cleaner startup/logging
+CMD ["python", "-u", "-m", "services.producers.main", "--mode", "both", "--eps-shipments", "2", "--eps-gps", "2"]

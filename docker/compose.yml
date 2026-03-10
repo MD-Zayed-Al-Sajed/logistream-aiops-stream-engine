@@ -39,6 +39,18 @@ services:
       interval: 5s
       timeout: 5s
       retries: 40
+  
+  kafka-init:
+    image: confluentinc/cp-kafka:7.3.2
+    container_name: kafka-init
+    depends_on:
+      kafka:
+        condition: service_healthy
+    volumes:
+      - ./kafka/init-topics.sh:/init-topics.sh:ro
+    entrypoint: ["/bin/sh", "/init-topics.sh"]
+    networks: [logistream]
+    restart: "no"
 
   schemareg:
     image: confluentinc/cp-schema-registry:7.3.2
@@ -69,6 +81,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
+    volumes:
+     - ./postgres/init:/docker-entrypoint-initdb.d:ro
     networks: [logistream]
     restart: unless-stopped
     healthcheck:
