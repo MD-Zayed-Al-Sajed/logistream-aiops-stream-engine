@@ -3,7 +3,7 @@ Domain-agnostic AIOps platform designed to ingest and analyze continuous, high-v
 # LogiStream AIOps Platform
 ## Distributed real-time event streaming platform
 
-The platform designed to ingest, process, analyze, and persist high-velocity logistics telemetry streams. It enables proactive operational intelligence through live feature engineering, anomaly signalling, and time-series analytics.
+The platform designed to ingest, process, analyze, and persist high-velocity data telemetry streams. It enables proactive operational intelligence through live feature engineering, anomaly signalling, and time-series analytics.
 ---
 <img width="1380" height="1131" alt="image" src="https://github.com/user-attachments/assets/8b6c4d2d-4766-42e7-a180-31f5690f1626" />
 <img width="1521" height="558" alt="image" src="https://github.com/user-attachments/assets/1c292de7-a06b-43d8-a76a-2c733ff22ef5" />
