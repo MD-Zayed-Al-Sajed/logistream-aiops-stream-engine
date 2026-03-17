@@ -147,39 +147,6 @@ Planned evolution includes:
 </details>
 
 <details>
-<summary><h1>⚛️ Quantum-Aligned Operational Intelligence (Forward Looking)</summary>
-
-Although currently running on classical distributed systems,  
-the platform architecture is compatible with **future hybrid quantum-classical operational workflows.**
-
-Potential alignment areas include:
-
-- Quantum annealing for combinatorial route optimization  
-- Probabilistic delay propagation modelling  
-- Large-scale scheduling acceleration  
-- Post-quantum secure telemetry authentication  
-
-In such environments, LogiStream functions as a **real-time orchestration nervous system**  
-providing structured signals into high-complexity optimization engines.
-
-This forward-compatible design prepares the system for:
-
-- financial risk simulation pipelines  
-- autonomous infrastructure decision networks
-- Large-scale NPC behavioural telemetry pipelines for real-time game simulation environments
- 
-- Distributed agent-state synchronization for MMO-scale virtual worlds  
-- High-frequency event orchestration for crowd / traffic / logistics simulation engines
-  
-- Real-time decision signal routing for autonomous multi-agent systems
-    
-- Adaptive simulation feedback loops for reinforcement learning environments  
-
-In such contexts, LogiStream can act as a real-time state propagation and operational intelligence backbone, enabling scalable coordination across thousands to millions of simulated entities.
-
-</details>
-
-<details>
 <summary><h1>⚖️ Responsible Use & Operational Scope</summary>
 The system is **not designed or certified** for deployment in regulated or life-critical domains such as:
 
@@ -222,9 +189,42 @@ All anomaly detections surface through observable dashboards requiring human con
 </details>
 
 <details>
+<summary><h1>⚛️ Quantum-Aligned Operational Intelligence (Forward Looking)</summary>
+
+Although currently running on classical distributed systems,  
+the platform architecture is compatible with **future hybrid quantum-classical operational workflows.**
+
+Potential alignment areas include:
+
+- Quantum annealing for combinatorial route optimization  
+- Probabilistic delay propagation modelling  
+- Large-scale scheduling acceleration  
+- Post-quantum secure telemetry authentication  
+
+In such environments, LogiStream functions as a **real-time orchestration nervous system**  
+providing structured signals into high-complexity optimization engines.
+
+This forward-compatible design prepares the system for:
+
+- financial risk simulation pipelines  
+- autonomous infrastructure decision networks
+- Large-scale NPC behavioural telemetry pipelines for real-time game simulation environments
+ 
+- Distributed agent-state synchronization for MMO-scale virtual worlds  
+- High-frequency event orchestration for crowd / traffic / logistics simulation engines
+  
+- Real-time decision signal routing for autonomous multi-agent systems
+    
+- Adaptive simulation feedback loops for reinforcement learning environments  
+
+In such contexts, LogiStream can act as a real-time state propagation and operational intelligence backbone, enabling scalable coordination across thousands to millions of simulated entities.
+
+</details>
+
+<details>
 <summary><h1>🔐 A Note on Post-Quantum Operational Considerations</summary>
 
-Modern distributed intelligence platforms must consider the long-term impact of emerging quantum computing capabilities on data integrity, authentication, and secure telemetry pipelines.
+Modern distributed intelligence platforms should consider the long-term impact of emerging quantum computing capabilities on data integrity, authentication, and secure telemetry pipelines.
 
 While this system does not currently implement post-quantum cryptographic primitives by default, its architecture is designed to remain compatible with future migration paths toward quantum-resilient security models.
 
