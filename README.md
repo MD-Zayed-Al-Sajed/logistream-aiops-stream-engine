@@ -1,8 +1,7 @@
-A real-time distributed stream processing and compute orchestration platform for operational telemetry, anomaly detection, and time-series intelligence.
-<br>
+
 ████████████████████████████████████████████████████████████████████████
 # LogiStream AIOps Runtime Engine
-## A Distributed Real-Time Compute Orchestration Platform
+## A real-time distributed stream processing and compute orchestration platform for operational telemetry, anomaly detection, and time-series intelligence.
 
 The platform designed to ingest, process, analyze, and persist high-velocity data telemetry streams. It enables proactive operational intelligence through live feature engineering, anomaly signalling, and time-series analytics.
 ---
