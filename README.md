@@ -1,7 +1,6 @@
 Domain-agnostic AIOps platform designed to ingest and analyze continuous, high-volume data streams from heterogeneous sources (Applications, Microservices, IoT, Incidents, and Logistics & Supply Chain). The system replaces batch reporting with real-time, predictive intelligence.
 
-
-█████████████████████████████████████████████████████████████████████████████████████████
+████████████████████████████████████████████████████████████████████████
 # LogiStream AIOps Runtime Engine
 ## A Distributed Real-Time Compute Orchestration Platform
 
@@ -16,7 +15,7 @@ The platform designed to ingest, process, analyze, and persist high-velocity dat
 ## For observability 
 <img width="1557" height="668" alt="image" src="https://github.com/user-attachments/assets/673ccb55-1f7d-45e2-ab02-aebddf1a8085" />
 <img width="1529" height="266" alt="image" src="https://github.com/user-attachments/assets/1d2b5ef9-4052-43d5-bf6c-c158e1f5288f" />
-█████████████████████████████████████████████████████████████████████████████████████████
+████████████████████████████████████████████████████████████████████████
 
 ## Platform Overview
 
@@ -248,7 +247,7 @@ Production deployments should conduct formal cryptographic risk assessments and 
 
 **Major Phase:** Real-time streaming pipeline operational ✅ <br>
 **Minor Phase:** Predictive intelligence & decision automation layer 🛠️
-█████████████████████████████████████████████████████████████████████████████████████████
+████████████████████████████████████████████████████████████████████████
 
 ## 📄 License
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
