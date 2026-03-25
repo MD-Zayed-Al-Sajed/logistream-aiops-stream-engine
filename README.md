@@ -223,7 +223,7 @@ All anomaly detections surface through observable dashboards requiring human con
 
 - Containerized Cloud-Native Deployment: Managed the full SDLC of a fully containerized environment, ensuring the platform is scalable, observable, and capable of handling heterogeneous data sources with sub-second latency. ✅
 
-- Implemented Predictive Analytics & ML: Replaced traditional batch reporting with in-flight feature engineering and machine learning to detect anomalies and predict logistics delays before they impact operations. 🛠️
+- Implemented Predictive Analytics & ML: Replaced batch reporting with in-flight feature engineering and machine learning to detect anomalies and predict logistics delays before they impact operations. 🛠️✅
 
 - Developed Live Decision Dashboards: Created responsive React-based dashboards that consume live JSON streams via WebSockets, providing stakeholders with instant operational insights and automated system alerts. 🛠️✅
 
